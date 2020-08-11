@@ -24,7 +24,7 @@ def read_excel(excel_path, sheet_name, skip_first=True):
 
     return results
 
-# path = "D:\\workhome\\github\\PytestTest\\data\\测谈网接口测试用例.xlsx"
+# path = "data\\测谈网接口测试用例.xlsx"
 # sn = 'Sheet1'
 # res = read_excel(path, sn)
 # print(res)
