@@ -6,15 +6,16 @@ import os, sys
 sys.path.append(os.getcwd())
 from utils.dbtools import query
 from utils.filetools import write_file,read_file
-
+from utils.exceltools import read_excel
 def test_01_articleNew():
-    u = "http://192.144.148.91:2333/article/new"
-    d = {"title":"如何学习测试","content":"测试222内容","tags":"测试1234","brief":"测试介绍","ximg":"sss.jpg"}
-    h = {"Content-Type":"application/json","token":read_file("user_token.txt")}
+    r = read_excel("data\\测谈网接口测试用例.xlsx","Sheet1")
+    u = r[4][2]
+    d = eval(r[4][3])
+    h = eval(r[4][4])
     res = requests.post(url=u, json=d, headers=h)
     
-    assert res.status_code == 200
-    assert res.json()["status"] == 200
+    assert res.status_code == r[4][6]
+    assert res.json()["status"] == r[4][7]
     sql = "select * from t_article where id='{}'".format(res.json()["data"]["articleid"])
     assert len(query(sql)) != 0
 
